@@ -1,65 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
     public float moveSpeed;
-    public LayerMask solidObjectsLayer;
+    public bool isMoving = false;
+    
+    Vector3 mousePos;
+    Vector3 mouseWorldPos;
+    Rigidbody rb;
 
-    private bool isMoving;
-    private Vector2 input;
-
-
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
     private void Update()
     {
-        movement();
-        
-    }
-
-    void movement()
-    {
-        if(!isMoving)
-        {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
-
-            if (input.x != 0) input.y = 0;
-
-            if (input != Vector2.zero)
-            {
-                var targetPos = transform.position;
-                targetPos.x += input.x;
-                targetPos.y += input.y;
-
-                if (isWalkable(targetPos))
-                    StartCoroutine(Move(targetPos));
-            }
+        if(Input.GetMouseButtonDown(0)){
+            Movement();
+            isMoving = true;
         }
     }
 
-    IEnumerator Move(Vector3 targetPos)
+    void FixedUpdate()
     {
-        isMoving = true;
-        while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-            yield return null;
-        }
-        transform.position = targetPos;
-
-        isMoving = false;
+        if(isMoving)
+            Move(mouseWorldPos);
     }
 
-
-    private bool isWalkable(Vector3 targetPos)
+    void Movement()
     {
-        if(Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer) != null)
-        {
-            return  false;
-        }
+        rb.velocity = Vector3.zero;
 
-        return true;
+        mousePos = Input.mousePosition;
+        mousePos.z = Camera.main.nearClipPlane;
+        mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
+    
+        mouseWorldPos.y = mouseWorldPos.z = 0;
     }
 
+    void Move(Vector3 targetPos)
+    {
+        Vector3 newPosition = Vector3.MoveTowards(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(newPosition);
+
+        float compare = 2.7f;
+        // Berhenti ketika sudah dekat dengan target
+        // Value pembanding  tergantung size collider sepertinya
+        if (Vector3.Distance(newPosition, targetPos) <= compare)
+        {
+            rb.velocity = Vector3.zero;
+            isMoving = false;
+        }
+    }
 }

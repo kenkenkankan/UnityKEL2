@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: bf88b89ed09cccb47ab7a18eb837e54d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_0
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 926
+        width: 272
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fb7968c50ea61b4c8a4722fb5e14a29
+      internalID: 2057213331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_1
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 254
+        width: 343
+        height: 766
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f286d873ddeb6e44f8f7a0b83d7b9074
+      internalID: 35916998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_2
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 259
+        width: 235
+        height: 736
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5261b2e8b9f81b44eb52c60454ca1734
+      internalID: 1246524633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_3
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 255
+        width: 312
+        height: 762
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbe4c24be034e1444bba435bc1171c53
+      internalID: -1655168811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_4
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 257
+        width: 310
+        height: 760
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ef5b55d05058dc47b5566e3e51c23df
+      internalID: -1006189383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 775
+        width: 360
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d9d4875f4a9bb446a057da0c13f97b7
+      internalID: 230093824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 594
+        width: 513
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e940f2099b8c374caa40ef51e4ce348
+      internalID: -1360756452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_7
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 291
+        width: 473
+        height: 275
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c54d411dd7f34545881cca2135f85e5
+      internalID: 2044141476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_10
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 70
+        width: 251
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c2a561e5ceb7694fb73a3ac905d5c1e
+      internalID: -2075941046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_11
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 68
+        width: 280
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c34ccab63ed757840846b1ed03bc676e
+      internalID: -1855933577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_12
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 67
+        width: 175
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fd51a6b4bc4cab4b98ec7d5e7ceef43
+      internalID: -1450107909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_13
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 64
+        width: 453
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5d820c324c9a9d4db820f7b93c485ad
+      internalID: -1718594931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_14
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 63
+        width: 297
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 729cae70100ef284f85691a1c58b8176
+      internalID: 564043845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_0: 2057213331
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_1: 35916998
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_10: -2075941046
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_11: -1855933577
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_12: -1450107909
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_13: -1718594931
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_14: 564043845
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_15: -597364436
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_2: 1246524633
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_3: -1655168811
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_4: -1006189383
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_5: 230093824
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_6: -1360756452
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_7: 2044141476
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_8: 1884404857
+      Pohon Layer 3, Batu Layer 1, Daun Layer 1 dan 2_9: -2096461050
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
