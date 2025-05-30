@@ -3,14 +3,22 @@ using UnityEngine.AI;
 public class EnemyPathfinding : MonoBehaviour
 {
    
-    Transform player;
-    [SerializeField] float movementSpeed;
+    private Transform player;
+    [SerializeField] private float movementSpeed;
 
-    NavMeshAgent agent;
+    private NavMeshAgent agent;
+
+
+    private enum EnemyState
+    {
+        Idle, Patrol, Chasing, Returning
+    }
+
+    private EnemyState currentState;
 
     void Awake()
     {
-        player = FindFirstObjectByType<CharacterMovement>().transform;
+        player = FindFirstObjectByType<PlayerStats>().transform;
     }
 
     private void Start() {
