@@ -38,7 +38,7 @@ public class PlayerStats : CharacterStats
     [Header("Sanity UI")]
     [SerializeField] TMP_Text sanityValueUI;
     [SerializeField] float baseSanityRecovery; // Recovery value set by current sanity value
-    [SerializeField] Image sanityBar; // Temp, gonna change this into particleeffect
+    [SerializeField] Image sanityBar; // Temp, gonna change this into particle effect
     [SerializeField] float SBarProgressTime; // Cooldown for each time the bar color will change
     float progressTarget; // next value 
     [SerializeField] Gradient sanityGradient;
@@ -67,11 +67,10 @@ public class PlayerStats : CharacterStats
         if (Instance != null && Instance != this)
         {
             Debug.LogWarning("Extra is deleted");
-            Destroy(gameObject);
-            return;
+            
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        
 
         camManager = GetComponent<CameraManager>();
         playerAnim = GetComponent<PlayerAnimations>();

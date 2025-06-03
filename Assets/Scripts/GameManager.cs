@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public GameState currentState;
     public GameState previousState;
 
+
+
     private void Awake()
     {
         // Singleton Instance check
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Extra is deleted");
             Destroy(gameObject);
             return;
+
         }
         
         Instance = this;
@@ -39,6 +42,8 @@ public class GameManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
 
         InitState();
+
+        Debug.Log("Start PlayerInput");
     }
 
     public void NextLevel()
@@ -61,7 +66,8 @@ public class GameManager : MonoBehaviour
 
     public void SetGameState(GameState newState)
     {
-        if (currentState == newState) return;
+        if (currentState == newState)
+            return;
         
         OnGameStateChanged?.Invoke(newState);
 
@@ -73,16 +79,16 @@ public class GameManager : MonoBehaviour
                 // PlayerInput.Instance.EnableInput(true);
                 break;
             case GameState.Paused:
-                Time.timeScale = 0f;
+                Time.timeScale = 1f;
                 // PlayerInput.Instance.EnableInput(false);
                 break;
             case GameState.SceneTransition:
-                Time.timeScale = 0f;
+                Time.timeScale = 1f;
                 // PlayerInput.Instance.EnableInput(true);
                 // Scene Transition stuff
                 break;
             case GameState.GameOver:
-                Time.timeScale = 0f;
+                Time.timeScale = 1f;
                 // PlayerInput.Instance.EnableInput(true);
                 // Open Game Over Screen / Transition
                 break;

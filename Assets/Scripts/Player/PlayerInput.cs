@@ -88,7 +88,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.currentState != GameManager.GameState.Gameplay) return;
+        if (GameManager.Instance.currentState != GameManager.GameState.Gameplay)
         
         if (Input.anyKeyDown)
         {
@@ -197,12 +197,12 @@ public class PlayerInput : MonoBehaviour
                 // Journal UI interactions, pause via key || ->move to game state?
                 break;
             case PlayerState.Interacting:
-            //For iteractable item
+                //For interactable item
                 GameManager.Instance.SetGameState(GameManager.GameState.Paused);
                 // Intermediate state before dialogue & show monologue if can
                 break;
             case PlayerState.OnDialogue:
-            //for interactable npc
+                //for interactable npc
                 GameManager.Instance.SetGameState(GameManager.GameState.Paused);
                 // Dialogue UI interactions, pause via key
                 break;

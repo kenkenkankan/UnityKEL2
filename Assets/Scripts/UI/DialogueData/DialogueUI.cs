@@ -11,6 +11,7 @@ public class DialogueUI : MonoBehaviour
     private ResponseHandler responseHandler;
     private TypewriterEffect typewriterEffect;
 
+    public bool IsOpen { get; private set; }
 
     private void Start()
     {

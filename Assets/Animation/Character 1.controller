@@ -208,7 +208,7 @@ BlendTree:
   m_BlendType: 0
 --- !u!1101 &4302439260742134985
 AnimatorStateTransition:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

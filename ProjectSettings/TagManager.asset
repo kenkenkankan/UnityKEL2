@@ -9,6 +9,7 @@ TagManager:
   - Inventory
   - Item Slots
   - Sanity UI
+  - PondArea
   layers:
   - Default
   - TransparentFX

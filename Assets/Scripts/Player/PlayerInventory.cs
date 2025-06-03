@@ -65,12 +65,12 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         // Singleton Instance check
-        // if (Instance != null && Instance != this)
-        // {
-        //     Debug.LogWarning("Extra is deleted");
-        //     Destroy(gameObject);
-        //     return;
-        // }
+        if (Instance != null && Instance != this)
+        {
+            Debug.LogWarning("Extra is deleted");
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         DontDestroyOnLoad(gameObject);
         PopulateItemSlotElemets();
