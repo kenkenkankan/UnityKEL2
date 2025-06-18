@@ -10,6 +10,7 @@ TagManager:
   - Item Slots
   - Sanity UI
   - PondArea
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: UI
+    uniqueID: 3234012625
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

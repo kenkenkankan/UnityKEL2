@@ -34,8 +34,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
 
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
         }
-        
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
         
@@ -53,10 +55,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string SceneName)
     {
-        SceneManager.LoadSceneAsync(SceneName);
         previousScreen = currentScene;
-        currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadSceneAsync(SceneName);
+        // currentScene akan diatur ulang otomatis oleh OnSceneLoaded
     }
+
 
     #region GameState
     private void InitState()
@@ -97,5 +100,11 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        currentScene = scene;
+        SetGameState(GameState.Gameplay);
+    }
+
     #endregion
 }

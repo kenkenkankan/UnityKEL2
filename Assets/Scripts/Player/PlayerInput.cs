@@ -18,6 +18,8 @@ public class PlayerInput : MonoBehaviour
     const float BASE_MOVE_SPEED = 4;
     public bool isMoving;
 
+    public static PlayerInput Instance;
+
     private Vector2 input;
 
     [Header("Layer Masks")]
@@ -38,18 +40,18 @@ public class PlayerInput : MonoBehaviour
         {
             if (currentPlayerState == value || GameManager.Instance.currentState != GameManager.GameState.Gameplay) return;
 
-            if (PlayerStats.Instance.isSanitySubsribed)
+            if (PlayerStats.Instance.isSanitySubscribed)
             {
-                PlayerStats.OnSanityChanged -= (_) => PlayerStats.Instance.HandleSanityChange();
-                PlayerStats.Instance.isSanitySubsribed = false;
+                PlayerStats.OnSanityChanged -= (sanity) => PlayerStats.Instance.HandleSanityChange(sanity);
+                PlayerStats.Instance.isSanitySubscribed = false;
             }
 
             currentPlayerState = value;
 
             if (currentPlayerState != PlayerState.NearGhost)
             {
-                PlayerStats.OnSanityChanged += (_) => PlayerStats.Instance.HandleSanityChange();
-                PlayerStats.Instance.isSanitySubsribed = true;
+                PlayerStats.OnSanityChanged += (sanity) => PlayerStats.Instance.HandleSanityChange(sanity);
+                PlayerStats.Instance.isSanitySubscribed = true;
             }
         }
     }
@@ -63,14 +65,14 @@ public class PlayerInput : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerStats.OnSanityChanged += (_) => PlayerStats.Instance.HandleSanityChange();
-        PlayerStats.Instance.isSanitySubsribed = true;
+        PlayerStats.OnSanityChanged += (sanity) => PlayerStats.Instance.HandleSanityChange(sanity);
+        PlayerStats.Instance.isSanitySubscribed = true;
     }
 
     void OnDisable()
     {
-        PlayerStats.OnSanityChanged -= (_) => PlayerStats.Instance.HandleSanityChange();;
-        PlayerStats.Instance.isSanitySubsribed = false;
+        PlayerStats.OnSanityChanged += (sanity) => PlayerStats.Instance.HandleSanityChange(sanity);
+        PlayerStats.Instance.isSanitySubscribed = false;
     }
 
     private void Awake()
@@ -79,6 +81,14 @@ public class PlayerInput : MonoBehaviour
 
         dialogueUI = FindFirstObjectByType<DialogueUI>();
         flashlightAnchor = transform.GetChild(0);
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Buang duplicate
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -89,7 +99,10 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         if (GameManager.Instance.currentState != GameManager.GameState.Gameplay)
-        
+        {
+            return;
+        }
+
         if (Input.anyKeyDown)
         {
             if (Input.GetKeyDown(KeyCode.E) && currentPlayerState == PlayerState.Idle)
@@ -98,7 +111,7 @@ public class PlayerInput : MonoBehaviour
                 {
                     Interactable?.Interact(this);
                     Interactable?.ConfirmNotif.SetActive(false);
-                    SetPlayerState(PlayerState.Interacting);
+                    //SetPlayerState(PlayerState.Interacting);
                 }
             }
 
@@ -114,8 +127,8 @@ public class PlayerInput : MonoBehaviour
             SetPlayerState(PlayerState.Idle);
             input = Vector2.zero;
         }
-        
-        PlayerStateHandler();        
+
+        PlayerStateHandler();
     }
 
     private void MovingController()
@@ -153,9 +166,9 @@ public class PlayerInput : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, targetPos, BASE_MOVE_SPEED * PlayerStats.Instance.Stats.movementSpeed * Time.deltaTime);
 
-            
+
         yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D));
-                
+
         isMoving = false;
 
         SetPlayerState(PlayerState.Idle);
@@ -172,7 +185,7 @@ public class PlayerInput : MonoBehaviour
     }
 
     #region Playe State Handler Region
-    // May or may not moved to Player Input
+    //May or may not moved to Player Input
     public void SetPlayerState(PlayerState newState)
     {
         if (CurrentPlayerState == newState) return;
@@ -217,7 +230,9 @@ public class PlayerInput : MonoBehaviour
 
     #endregion
     // Making sure to unscribe event
-    void OnDestroy() {
-        PlayerStats.OnSanityChanged -= (_) => PlayerStats.Instance.HandleSanityChange();
+    void OnDestroy()
+    {
+        PlayerStats.OnSanityChanged += (sanity) => PlayerStats.Instance.HandleSanityChange(sanity);
     }
+
 }

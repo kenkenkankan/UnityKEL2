@@ -18,6 +18,8 @@ public class PondManager : MonoBehaviour
     private bool itemFound = false;
     private bool isMiniGameActive = false;
 
+    public ItemObject rewardItem;
+
     void Start()
     {
         GenerateGrid();
@@ -54,7 +56,19 @@ public class PondManager : MonoBehaviour
         {
             itemFound = true;
             Debug.Log("Item found!");
-            StartCoroutine(WaitBeforeExit()); // ✅ sekarang jalan coroutine
+
+            // Tambahkan item ke inventory
+            if (rewardItem != null)
+            {
+                PlayerInventory.Instance.StoreItem(rewardItem);
+                Debug.Log("Item reward telah ditambahkan ke inventory.");
+            }
+            else
+            {
+                Debug.LogWarning("Reward item belum di-assign di Inspector.");
+            }
+
+            StartCoroutine(WaitBeforeExit());
         }
         else if (currentAttempts >= maxAttempts)
         {
@@ -67,6 +81,12 @@ public class PondManager : MonoBehaviour
         }
     }
 
+
+    public void AddAttempts(int value)
+    {
+        maxAttempts += value;
+        Debug.Log($"Stick digunakan. Max attempts sekarang: {maxAttempts}");
+    }
 
     public void StartMiniGame()
     {
@@ -87,6 +107,7 @@ public class PondManager : MonoBehaviour
         pondUI.SetActive(false);
         Time.timeScale = 1f;
         isMiniGameActive = false;
+        Debug.Log("Mini game exited.");
     }
 
     public void ToggleMiniGame()
@@ -97,7 +118,7 @@ public class PondManager : MonoBehaviour
             StartMiniGame();
     }
 
-    IEnumerator WaitBeforeExit()
+    IEnumerator WaitBeforeExit()    
     {
         yield return new WaitForSecondsRealtime(3f); // ⏳ Tunggu 3 detik (waktu real walau game paused)
         ExitMiniGame();

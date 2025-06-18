@@ -2,200 +2,168 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PlayerStats : CharacterStats
+public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance;
+    public bool isSanitySubscribed { get; set; }
+    public PlayerStats Stats => this;
+    public float movementSpeed = 1f;
 
-    public static event Action<float> OnSanityChanged = delegate { };
-    [SerializeField]
-    public bool isSanitySubsribed;
 
-    public CharacterData.Stats Stats
-    {
-        get => currentStats;
-        set
-        {
-            if (currentStats != value)
-            {
-                currentStats = value;
-            }
-            SanityStateHandler();
-        }
-    }
+    [Header("Sanity Settings")]
+    [Range(0, 100)] public float sanity = 100f;
+    private float currentSanity = 100f; // Internal 0–1
+    [SerializeField] private float baseRecoveryRate = 0.002f;
+    [SerializeField] private float sanityRecoveryCooldown = 2f;
 
-    [SerializeField] float currentSanityRecoveryRate;
+    [Header("Sanity Particles (UI Canvas)")]
+    [SerializeField] private GameObject[] sanityParticles;
+
+
+
+    [Header("UI Text & Color")]
+    [SerializeField] private TMP_Text sanityText;
+    [SerializeField] private Gradient sanityGradient;
+
+    private SanityState currentState;
+    private CameraManager camManager;
 
     public enum SanityState
     {
-        Stable, Stressed, Distressed, Unstable, Psychotic, Death
+        Stable,
+        Stressed,
+        Distressed,
+        Unstable,
+        Psychotic,
+        Death
     }
 
-    // PlayerState previousPlayerState;
-    public SanityState currentSanityState;
-
-    [Header("Sanity UI")]
-    [SerializeField] TMP_Text sanityValueUI;
-    [SerializeField] float baseSanityRecovery; // Recovery value set by current sanity value
-    [SerializeField] Image sanityBar; // Temp, gonna change this into particle effect
-    [SerializeField] float SBarProgressTime; // Cooldown for each time the bar color will change
-    float progressTarget; // next value 
-    [SerializeField] Gradient sanityGradient;
-    Color newColor;
-
-    PlayerAnimations playerAnim;
-    // CheckPoint lastCheckPoint
-    CameraManager camManager;
-
-    // 
-    void OnEnable()
+    public enum VisualSanityState
     {
-        OnSanityChanged += (_) => HandleSanityChange();
-        isSanitySubsribed = true;
+        Fine,
+        Damaged,
+        Caution,
+        Danger
     }
 
-    void OnDisable()
-    {
-        OnSanityChanged -= (_) => HandleSanityChange();
-        isSanitySubsribed = false;
-    }
+    public static event Action<float> OnSanityChanged = delegate { };
 
     void Awake()
     {
-        // Singleton Instance check
         if (Instance != null && Instance != this)
         {
-            Debug.LogWarning("Extra is deleted");
-            
+            Destroy(gameObject);
+            return;
         }
+
         Instance = this;
-        
-
         camManager = GetComponent<CameraManager>();
-        playerAnim = GetComponent<PlayerAnimations>();
-
-        PopulateSanityUI();
-
-
-        InitState();
-        sanityBar.color = sanityGradient.Evaluate(SBarProgressTime);
-        OnSanityChanged = delegate { }; // Failsafe to empty the event
-        isSanitySubsribed = false;
-
-        UpdateSanityBar();
+        currentSanity = 1f;
+        UpdateSanityState();
+        UpdateVisualEffectForSanity();
     }
 
-    private void PopulateSanityUI()
+    void OnEnable() => OnSanityChanged += HandleSanityChange;
+    void OnDisable() => OnSanityChanged -= HandleSanityChange;
+
+    public void ModifySanity(float amount)
     {
-        GameObject go = GameObject.FindWithTag("Sanity UI");
-        sanityBar = go.transform.GetChild(0).GetComponent<Image>();
-        sanityValueUI = go.transform.GetChild(1).GetComponent<TMP_Text>();
+        currentSanity = Mathf.Clamp01(currentSanity + amount);
+        //Debug.Log($"ModifySanity() -> {currentSanity * 100f}%");
+        OnSanityChanged?.Invoke(currentSanity);
     }
 
-    private void InitState()
+    public void HandleSanityChange(float sanityValue)
     {
-        currentSanityState = SanityState.Stable;
-    }
+        UpdateSanityState();
+        UpdateVisualEffectForSanity();
 
-    public void HandleSanityChange()
-    {
+        StopAllCoroutines();
         StartCoroutine(RecoverSanity());
-        UpdateSanityBar();
     }
 
-    private void UpdateSanityBar()
+    private IEnumerator RecoverSanity()
     {
-        progressTarget = Stats.Sanity / data.stats.Sanity;
-        sanityValueUI.text = Mathf.Round(100 * Stats.Sanity).ToString();
-
-        StartCoroutine(SanityBarSmoother());
-
-        newColor = sanityGradient.Evaluate(progressTarget);
+        yield return new WaitForSeconds(sanityRecoveryCooldown);
+        ModifySanity(baseRecoveryRate);
     }
 
-    IEnumerator SanityBarSmoother()
+    private void UpdateSanityState()
     {
-        float fillAmount = sanityBar.fillAmount;
-        Color currentColor = sanityBar.color;
-
-        float elapsedTime = 0;
-        while (elapsedTime < SBarProgressTime)
+        SanityState newState = GetSanityStateFromValue(currentSanity);
+        if (currentState != newState)
         {
-            elapsedTime += Time.deltaTime;
-            sanityBar.fillAmount = Mathf.Lerp(fillAmount, progressTarget, elapsedTime / SBarProgressTime);
-
-            sanityBar.color = Color.Lerp(currentColor, newColor, elapsedTime / SBarProgressTime);
-            yield return null;
+            currentState = newState;
+            ApplyStateEffects(newState);
         }
     }
 
-    void Update()
+    private SanityState GetSanityStateFromValue(float sanity)
     {
-        DecreaseSanity(); //temp
+        if (sanity <= 0.001f) return SanityState.Death;
+        if (sanity < 0.25f) return SanityState.Psychotic;
+        if (sanity < 0.45f) return SanityState.Unstable;
+        if (sanity < 0.65f) return SanityState.Distressed;
+        if (sanity < 0.85f) return SanityState.Stressed;
+        return SanityState.Stable;
     }
 
-    public void DecreaseSanity()
+    private VisualSanityState GetVisualSanityStateFromValue(float sanity)
     {
-        // CharacterData.Stats aaaaa = new ();
-        // aaaaa.Sanity = -0.007f;
-        // Stats += aaaaa;
+        if (sanity >= 0.75f) return VisualSanityState.Fine;
+        if (sanity >= 0.5f) return VisualSanityState.Damaged;
+        if (sanity >= 0.25f) return VisualSanityState.Caution;
+        return VisualSanityState.Danger;
     }
 
-    IEnumerator RecoverSanity()
+    private void UpdateVisualEffectForSanity()
     {
-        currentSanityRecoveryRate = baseSanityRecovery + Stats.sanityRecoveryRate;
-        Stats.Sanity += currentSanityRecoveryRate;
-        yield return new WaitForSeconds(2f); // Temp cooldown still to fast?
-    }
+        VisualSanityState visualState = GetVisualSanityStateFromValue(currentSanity);
+        //Debug.Log($"Visual State: {visualState}");
 
-    private void SetSanityState(SanityState newState)
-    {
-        if (currentSanityState == newState) return;
-
-        currentSanityState = newState;
-    }
-
-    private void SanityStateHandler()
-    {
-        switch (Stats.Sanity)
+        // Partikel
+        for (int i = 0; i < sanityParticles.Length; i++)
         {
-            //Temp values
-            case >= 0.85f:
-                SetSanityState(SanityState.Stable);
-                baseSanityRecovery = 0.005f;
+            sanityParticles[i].SetActive(i == (int)visualState);
+        }
+
+        // UI Group
+
+    }
+
+    private void ApplyStateEffects(SanityState state)
+    {
+        switch (state)
+        {
+            case SanityState.Stable:
+                baseRecoveryRate = 0.005f;
+                camManager?.StopShake();
                 break;
-            case < 0.85f and >= 0.65f:
-                SetSanityState(SanityState.Stressed);
-                baseSanityRecovery = 0.004f;
-                if (camManager.isShaking) camManager.StopShake();
+            case SanityState.Stressed:
+                baseRecoveryRate = 0.004f;
+                camManager?.StopShake();
                 break;
-            case < 0.65f and >= 0.45f:
-                SetSanityState(SanityState.Distressed);
-                baseSanityRecovery = 0.003f;
-                if (camManager.isShaking) camManager.StopShake();
+            case SanityState.Distressed:
+                baseRecoveryRate = 0.003f;
+                camManager?.StopShake();
                 break;
-            case < 0.45f and >= 0.25f:
-                SetSanityState(SanityState.Unstable);
-                baseSanityRecovery = 0.002f;
-                camManager.shakeAmplitude = new(0.3f, 0.3f);
-                if (!camManager.isShaking) camManager.OnShake();
+            case SanityState.Unstable:
+                baseRecoveryRate = 0.002f;
+                camManager?.SetShakeIntensity(new Vector2(0.3f, 0.3f));
                 break;
-            case < 0.25f and > 0.001f:
-                SetSanityState(SanityState.Psychotic);
-                baseSanityRecovery = 0.001f;
-                camManager.shakeAmplitude = new(0.5f, 0.5f);
-                if (!camManager.isShaking) camManager.OnShake();
+            case SanityState.Psychotic:
+                baseRecoveryRate = 0.001f;
+                camManager?.SetShakeIntensity(new Vector2(0.5f, 0.5f));
                 break;
-            case <= 0.001f:
-                SetSanityState(SanityState.Death);
-                camManager.StopShake();
-                GameManager.Instance.SetGameState(GameManager.GameState.GameOver);
-                break;
-            default:
-                Debug.LogWarning("Unknown Sanity State");
+            case SanityState.Death:
+                camManager?.StopShake();
+                GameManager.Instance?.SetGameState(GameManager.GameState.GameOver);
                 break;
         }
-        OnSanityChanged?.Invoke(Stats.Sanity);
     }
+
+    // Opsional untuk skrip lain
+    public void ReduceSanity(float amount) => ModifySanity(-amount / 100f);
+    public void RecoverSanity(float amount) => ModifySanity(amount / 100f);
 }

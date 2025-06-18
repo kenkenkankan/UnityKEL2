@@ -21,18 +21,18 @@ public class PondInteraction : MonoBehaviour
         Debug.Log("Pond minigame activated");
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter(Collider player)
     {
-        if (other.CompareTag("Player"))
+        if (player.CompareTag("Player"))
         {
             playerInRange = true;
             Debug.Log("Player near pond");
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit(Collider player)
     {
-        if (other.CompareTag("Player"))
+        if (player.CompareTag("Player"))
         {
             playerInRange = false;
             Debug.Log("Player left pond");

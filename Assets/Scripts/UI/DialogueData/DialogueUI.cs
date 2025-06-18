@@ -27,6 +27,11 @@ public class DialogueUI : MonoBehaviour
         StartCoroutine(StepThroughDialogue(dialogueObject));
     }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private IEnumerator StepThroughDialogue(DialogueObject dialogueObject)
     {
         for (int i = 0; i < dialogueObject.Dialogue.Length; i++)

@@ -24,6 +24,8 @@ public class SceneChanger : MonoBehaviour, IInteractable
         {
             player.Interactable = this;
             confirmNotif.SetActive(true);
+
+            Debug.Log($"Player {player.name} entered the trigger for scene change to {ConnectedSceneName}.");
         }
     }
     
@@ -38,6 +40,7 @@ public class SceneChanger : MonoBehaviour, IInteractable
     
     public void Interact(PlayerInput player)
     {
+        Debug.Log($"Interacting: Changing to scene {ConnectedSceneName}");
         GameManager.Instance.LoadScene(ConnectedSceneName);
     }
 }

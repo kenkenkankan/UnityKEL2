@@ -22,6 +22,19 @@ public class CameraManager : MonoBehaviour
         isShaking = false;
     }
 
+    void Awake()
+    {
+        GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
+        if (cam != null)
+        {
+            DontDestroyOnLoad(cam);
+        }
+
+        DontDestroyOnLoad(this.gameObject); // Pastikan CameraManager juga tidak hancur
+    }
+
+
+
     public void OnShake()
     {
         shakeComponent.rotationShake.noiseType = Shaker.NoiseType.WhiteNoise;
@@ -36,6 +49,17 @@ public class CameraManager : MonoBehaviour
         shakeComponent.StopShake();
         isShaking = false;
     }
+
+    public void SetShakeIntensity(Vector2 intensity)
+    {
+        shakeAmplitude = intensity;
+
+        if (!isShaking)
+        {
+            OnShake();
+        }
+    }
+
 
     void SwitchCamera(CinemachineVirtualCamera targetCam)
     {

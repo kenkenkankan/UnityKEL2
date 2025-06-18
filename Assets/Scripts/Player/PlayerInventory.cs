@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,18 +14,25 @@ public class PlayerInventory : MonoBehaviour
     [Serializable]
     public class Slot
     {
-        public Item item;
+        public ItemObject item;
         public Image image;
         public Button itemButton;
-        public void AssignItem(Item item)
+        public Sprite icon;
+        public void AssignItem(ItemObject item)
         {
-
+            this.item = item;
+            image.sprite = item.icon;
+            image.enabled = true;
         }
+
 
         public void ClearSlot()
         {
-
+            item = null;
+            image.sprite = null;
+            image.enabled = false;
         }
+
 
         public void IsEmpty()
         {
@@ -42,10 +50,11 @@ public class PlayerInventory : MonoBehaviour
         public Button discradButton;
         public Button closeUIButton;
 
-        public void AssignItem(Item item)
+        public void AssignItem(ItemObject item)
         {
-
+           
         }
+
 
         public void ClearSlot()
         {
@@ -59,7 +68,7 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public List<Slot> itemSlots = new(3);
-    public List<Item> itemJournal = new();
+    public List<ItemObject> itemJournal = new();
     public ItemDescriptionUI itemUI;
 
     private void Awake()
@@ -100,32 +109,31 @@ public class PlayerInventory : MonoBehaviour
         itemUI.closeUIButton = go.transform.GetChild(index).GetComponent<Button>();
     }
 
-    public void StoreItem(Item item)
+    public void StoreItem(ItemObject item)
     {
-        if (itemSlots.Count >= 3)
-        {
-            // Open monologue
-            return;
-        }
-
         foreach (var slot in itemSlots)
         {
-            if (!slot.item)
+            if (slot.item == null)
             {
-                slot.item = item;
-                break;
+                slot.AssignItem(item);
+                return;
             }
         }
+
+        Debug.Log("Inventory penuh!");
+        // Bisa tambahkan notifikasi di UI
     }
+
 
     // For item slot reference when it clicked
     public void GetItem(int itemSlotIndex)
     {
         var item = itemSlots[itemSlotIndex].item;
         ShowDescription(item);
+
     }
 
-    void ShowDescription(Item item)
+    void ShowDescription(ItemObject item)
     {
         // itemUI.image.sprite = item.
         itemUI.image.gameObject.SetActive(true);
@@ -140,5 +148,46 @@ public class PlayerInventory : MonoBehaviour
     {
         
     }
-    
+
+    public void UseItem(int index)
+    {
+        var item = itemSlots[index].item;
+        if (item != null)
+        {
+            item.ApplyEffect(gameObject); // Kirim player sebagai 'user'
+            itemSlots[index].ClearSlot();
+        }
+    }
+
+    public void ApplySelectedItem()
+{
+    var selectedItem = itemUI.image.sprite;
+    for (int i = 0; i < itemSlots.Count; i++)
+    {
+        if (itemSlots[i].item != null && itemSlots[i].item.icon == selectedItem)
+        {
+            itemSlots[i].item.ApplyEffect(gameObject); // <-- Panggil efek item
+            itemSlots[i].ClearSlot();
+            CloseDescription();
+            break;
+        }
+    }
+}
+
+    public bool TryUseStick()
+    {
+        foreach (var slot in itemSlots)
+        {
+            if (slot.item != null && slot.item.itemName == "Stick") // pastikan nama cocok
+            {
+                itemJournal.Remove(slot.item); // opsional: jika perlu log
+                slot.ClearSlot(); // kosongkan slot
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 }
