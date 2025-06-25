@@ -12,15 +12,16 @@ public class PlayerStats : MonoBehaviour
 
 
     [Header("Sanity Settings")]
-    [Range(0, 100)] public float sanity = 100f;
     private float currentSanity = 100f; // Internal 0–1
-    [SerializeField] private float baseRecoveryRate = 0.002f;
+    [SerializeField] private float baseSanity = 100f;
     [SerializeField] private float sanityRecoveryCooldown = 2f;
 
     [Header("Sanity Particles (UI Canvas)")]
     [SerializeField] private GameObject[] sanityParticles;
 
-
+    [Header("Sanity Regeneration")]
+    private Coroutine lanternRegenCoroutine;
+    [SerializeField] private float lanternRegenRate = 0.01f;
 
     [Header("UI Text & Color")]
     [SerializeField] private TMP_Text sanityText;
@@ -69,10 +70,10 @@ public class PlayerStats : MonoBehaviour
 
     public void ModifySanity(float amount)
     {
-        currentSanity = Mathf.Clamp01(currentSanity + amount);
-        //Debug.Log($"ModifySanity() -> {currentSanity * 100f}%");
+        currentSanity = Mathf.Clamp(currentSanity + amount, 0f, 100f);
         OnSanityChanged?.Invoke(currentSanity);
     }
+
 
     public void HandleSanityChange(float sanityValue)
     {
@@ -86,7 +87,7 @@ public class PlayerStats : MonoBehaviour
     private IEnumerator RecoverSanity()
     {
         yield return new WaitForSeconds(sanityRecoveryCooldown);
-        ModifySanity(baseRecoveryRate);
+        ModifySanity(baseSanity);
     }
 
     private void UpdateSanityState()
@@ -108,7 +109,6 @@ public class PlayerStats : MonoBehaviour
         if (sanity < 0.85f) return SanityState.Stressed;
         return SanityState.Stable;
     }
-
     private VisualSanityState GetVisualSanityStateFromValue(float sanity)
     {
         if (sanity >= 0.75f) return VisualSanityState.Fine;
@@ -120,16 +120,18 @@ public class PlayerStats : MonoBehaviour
     private void UpdateVisualEffectForSanity()
     {
         VisualSanityState visualState = GetVisualSanityStateFromValue(currentSanity);
-        //Debug.Log($"Visual State: {visualState}");
 
-        // Partikel
         for (int i = 0; i < sanityParticles.Length; i++)
         {
-            sanityParticles[i].SetActive(i == (int)visualState);
+            if (sanityParticles[i] != null)
+            {
+                // Cek apakah GameObject sudah dihancurkan
+                if (sanityParticles[i] != null && !sanityParticles[i].Equals(null))
+                {
+                    sanityParticles[i].SetActive(i == (int)visualState);
+                }
+            }
         }
-
-        // UI Group
-
     }
 
     private void ApplyStateEffects(SanityState state)
@@ -137,29 +139,55 @@ public class PlayerStats : MonoBehaviour
         switch (state)
         {
             case SanityState.Stable:
-                baseRecoveryRate = 0.005f;
+                baseSanity = 0.005f;
                 camManager?.StopShake();
                 break;
             case SanityState.Stressed:
-                baseRecoveryRate = 0.004f;
+                baseSanity = 0.004f;
                 camManager?.StopShake();
                 break;
             case SanityState.Distressed:
-                baseRecoveryRate = 0.003f;
+                baseSanity = 0.003f;
                 camManager?.StopShake();
                 break;
             case SanityState.Unstable:
-                baseRecoveryRate = 0.002f;
+                baseSanity = 0.002f;
                 camManager?.SetShakeIntensity(new Vector2(0.3f, 0.3f));
                 break;
             case SanityState.Psychotic:
-                baseRecoveryRate = 0.001f;
+                baseSanity = 0.001f;
                 camManager?.SetShakeIntensity(new Vector2(0.5f, 0.5f));
                 break;
             case SanityState.Death:
                 camManager?.StopShake();
                 GameManager.Instance?.SetGameState(GameManager.GameState.GameOver);
                 break;
+        }
+    }
+
+    public void StartLanternRegen()
+    {
+        if (lanternRegenCoroutine != null)
+            StopCoroutine(lanternRegenCoroutine);
+
+        lanternRegenCoroutine = StartCoroutine(LanternRegen());
+    }
+
+    public void StopLanternRegen()
+    {
+        if (lanternRegenCoroutine != null)
+        {
+            StopCoroutine(lanternRegenCoroutine);
+            lanternRegenCoroutine = null;
+        }
+    }
+
+    private IEnumerator LanternRegen()
+    {
+        while (true)
+        {
+            ModifySanity(lanternRegenRate);
+            yield return new WaitForSeconds(0.5f); // sesuaikan frekuensi
         }
     }
 

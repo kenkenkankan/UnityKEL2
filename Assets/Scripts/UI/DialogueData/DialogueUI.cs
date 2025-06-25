@@ -8,7 +8,7 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private TMP_Text textLabel;
     
     private PlayerInput input; 
-    private ResponseHandler responseHandler;
+
     private TypewriterEffect typewriterEffect;
 
     public bool IsOpen { get; private set; }
@@ -18,7 +18,7 @@ public class DialogueUI : MonoBehaviour
         input = FindFirstObjectByType<PlayerInput>();
 
         typewriterEffect = GetComponent<TypewriterEffect>();
-        responseHandler = GetComponent<ResponseHandler>();
+
     }
 
     public void ShowDialogue(DialogueObject dialogueObject)
@@ -42,15 +42,6 @@ public class DialogueUI : MonoBehaviour
             if (i == dialogueObject.Dialogue.Length - 1 && dialogueObject.HasResponses) break;
 
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
-        }
-
-        if (dialogueObject.HasResponses)
-        {
-            responseHandler.ShowResponses(dialogueObject.Responses);
-        }
-        else
-        {
-            CloseDialogueBox();
         }
     }
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,7 @@ public class PlayerInventory : MonoBehaviour
     [Serializable]
     public class Slot
     {
+        public int index; // Optional, for reference
         public ItemObject item;
         public Image image;
         public Button itemButton;
@@ -88,12 +89,19 @@ public class PlayerInventory : MonoBehaviour
 
     private void PopulateItemSlotElemets()
     {
-        GameObject go = GameObject.FindWithTag("Item Slots"); 
-        foreach (var slot in itemSlots.Select((value, index) => new {value, index} ))
+        GameObject go = GameObject.FindWithTag("Item Slots");
+        foreach (var slot in itemSlots.Select((value, index) => new { value, index }))
         {
             GameObject goChild = go.transform.GetChild(slot.index).gameObject;
             slot.value.image = goChild.GetComponent<Image>();
             slot.value.itemButton = goChild.GetComponent<Button>();
+            slot.value.index = slot.index; // simpan index ke dalam slot
+
+            int capturedIndex = slot.index; // hindari closure problem
+            slot.value.itemButton.onClick.AddListener(() =>
+            {
+                UseItem(capturedIndex); // atau bisa ganti ke RemoveItem(capturedIndex);
+            });
         }
     }
 
@@ -133,16 +141,57 @@ public class PlayerInventory : MonoBehaviour
 
     }
 
-    void ShowDescription(ItemObject item)
+    public void ShowDescription(ItemObject item)
     {
-        // itemUI.image.sprite = item.
+        itemUI.itemName.text = item.itemName;
+        itemUI.itemDescription.text = item.description;
+        itemUI.image.sprite = item.icon;
         itemUI.image.gameObject.SetActive(true);
+
+        itemUI.itemName.transform.parent.gameObject.SetActive(true);
+
+        PauseGame(); // ⏸ Pause gameplay di sini
+
+        itemUI.applyItemButton.onClick.RemoveAllListeners();
+        itemUI.applyItemButton.onClick.AddListener(() =>
+        {
+            item.ApplyEffect(gameObject);
+            RemoveItemFromInventory(item);
+            CloseDescription();
+        });
+
+        itemUI.discradButton.onClick.RemoveAllListeners();
+        itemUI.discradButton.onClick.AddListener(() =>
+        {
+            RemoveItemFromInventory(item);
+            CloseDescription();
+        });
+
+        itemUI.closeUIButton.onClick.RemoveAllListeners();
+        itemUI.closeUIButton.onClick.AddListener(() =>
+        {
+            CloseDescription();
+        });
+    }
+
+    private void RemoveItemFromInventory(ItemObject item)
+    {
+        foreach (var slot in itemSlots)
+        {
+            if (slot.item == item)
+            {
+                slot.ClearSlot();
+                break;
+            }
+        }
     }
 
     public void CloseDescription()
     {
-        itemUI.image.gameObject.SetActive(false);
+        itemUI.itemName.transform.parent.gameObject.SetActive(false);
+        ResumeGame(); // ▶ Lanjutkan gameplay
     }
+
 
     public void RemoveItem()
     {
@@ -189,5 +238,14 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
+    private void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+    }
 
 }

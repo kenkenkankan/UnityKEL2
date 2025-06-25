@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
@@ -5,29 +6,38 @@ public class ItemPickup : MonoBehaviour
     private bool isPlayerInRange = false;
     public ItemObject item;
 
+    [SerializeField] private GameObject confirmNotif;
+    public GameObject ConfirmNotif => confirmNotif;
+
     private void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
             PlayerInventory.Instance.StoreItem(item);
-            Destroy(gameObject);
+            PlayerInventory.Instance.ShowDescription(item);
+            Destroy(gameObject); // atau bisa gunakan SetActive(false) jika ingin tampil efek pickup dulu
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && other.TryGetComponent(out PlayerInput player))
+        if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            Debug.Log($"Press E to pickup");
+            confirmNotif.SetActive(true);
+            Debug.Log("Press E to pickup - Enter");
         }
     }
+
+
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player") && isPlayerInRange)
         {
             isPlayerInRange = false;
+            confirmNotif.SetActive(false);
             Debug.Log($"Press E to pickup - Exit");
         }
     }

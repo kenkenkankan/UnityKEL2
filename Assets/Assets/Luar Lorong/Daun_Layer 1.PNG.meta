@@ -95,7 +95,112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Daun_Layer 1_0
+      rect:
+        serializedVersion: 2
+        x: 985
+        y: 771
+        width: 453
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62d3608a8d0175545b2edc4bc899af0e
+      internalID: 1045565571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Daun_Layer 1_1
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 770
+        width: 297
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 056847be094fa25478241acbb8cc2ead
+      internalID: 1266789456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Daun_Layer 1_3
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 776
+        width: 251
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da6abdfb9d62cfc42bc42255bba42daf
+      internalID: 348500929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Daun_Layer 1_4
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 775
+        width: 280
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aed71989977d21845aa1fe873992b9e0
+      internalID: 1797533729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Daun_Layer 1_5
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 773
+        width: 203
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a3a163523d2f15469f5ef8a0bd006d8
+      internalID: -1318436067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +211,14 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Daun_Layer 1_0: 1045565571
+      Daun_Layer 1_1: 1266789456
+      Daun_Layer 1_2: 973489215
+      Daun_Layer 1_3: 348500929
+      Daun_Layer 1_4: 1797533729
+      Daun_Layer 1_5: -1318436067
+      Daun_Layer 1_6: 1790186923
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

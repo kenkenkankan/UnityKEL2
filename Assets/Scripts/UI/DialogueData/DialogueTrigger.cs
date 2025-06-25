@@ -26,6 +26,10 @@ public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
     private bool isPlayerInRange = false;
+
+    [SerializeField] private GameObject confirmNotif;
+    public GameObject ConfirmNotif => confirmNotif;
+
     void Update()
     {
         // Cegah memicu dialog berulang saat dialog masih aktif
@@ -51,6 +55,7 @@ public class DialogueTrigger : MonoBehaviour
         if (player.CompareTag("Player"))
         {
             isPlayerInRange = true;
+            confirmNotif.SetActive(true);
             Debug.Log("Player entered dialogue area");
         }
     }
@@ -60,6 +65,7 @@ public class DialogueTrigger : MonoBehaviour
         if (player.CompareTag("Player"))
         {
             isPlayerInRange = false;
+            confirmNotif.SetActive(false);
             Debug.Log("Player left dialogue area");
         }
     }

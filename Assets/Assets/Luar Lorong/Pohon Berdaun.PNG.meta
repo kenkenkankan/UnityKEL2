@@ -95,7 +95,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Pohon Berdaun_0
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 90
+        width: 481
+        height: 869
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14119484a7b9c1b4999e281d5befc332
+      internalID: 2122976671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Berdaun_1
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 87
+        width: 495
+        height: 870
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc2a8bee146d17448a1b27f3532d3bae
+      internalID: 2139358376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pohon Berdaun_2
+      rect:
+        serializedVersion: 2
+        x: 1362
+        y: 90
+        width: 530
+        height: 868
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 636442a24a6c5e0478b9397965736e71
+      internalID: 1248335111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +169,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pohon Berdaun_0: 2122976671
+      Pohon Berdaun_1: 2139358376
+      Pohon Berdaun_2: 1248335111
+      Pohon Berdaun_3: 1058990546
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
