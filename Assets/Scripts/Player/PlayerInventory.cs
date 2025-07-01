@@ -26,14 +26,12 @@ public class PlayerInventory : MonoBehaviour
             image.enabled = true;
         }
 
-
         public void ClearSlot()
         {
             item = null;
             image.sprite = null;
             image.enabled = false;
         }
-
 
         public void IsEmpty()
         {
@@ -93,7 +91,8 @@ public class PlayerInventory : MonoBehaviour
         foreach (var slot in itemSlots.Select((value, index) => new { value, index }))
         {
             GameObject goChild = go.transform.GetChild(slot.index).gameObject;
-            slot.value.image = goChild.GetComponent<Image>();
+            slot.value.image = goChild.transform.GetChild(0).GetComponent<Image>();
+            slot.value.image.enabled = false;
             slot.value.itemButton = goChild.GetComponent<Button>();
             slot.value.index = slot.index; // simpan index ke dalam slot
 
@@ -124,6 +123,7 @@ public class PlayerInventory : MonoBehaviour
             if (slot.item == null)
             {
                 slot.AssignItem(item);
+                slot.image.enabled = true;
                 return;
             }
         }
@@ -180,6 +180,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (slot.item == item)
             {
+                slot.image.enabled = false;
                 slot.ClearSlot();
                 break;
             }
