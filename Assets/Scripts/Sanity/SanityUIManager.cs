@@ -13,8 +13,6 @@ public class SanityUIManager : MonoBehaviour
     [SerializeField] bool debug;
     public void UpdateVisual(float sanityValue)
     {
-        Debug.Log("invoke!");
-
         ParticleSystem.ColorOverLifetimeModule colormodule = colorOver.colorOverLifetime;
         if (sanityValue >= 75)
             colormodule.color = knob.color = newColor = fineGrad.colorKeys[0].color;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
-    [Header("Window Switcher")]
+    [Header("Menu Window Switcher")]
     [SerializeField] GameObject menu;
 
     public virtual void SwitchMenu()

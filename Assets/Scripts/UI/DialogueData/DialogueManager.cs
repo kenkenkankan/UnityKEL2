@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueArea;
 
     private Queue<DialogueLine> lines;
-
+    private Dialogue currentDialog;
+    private DialogueTrigger activeSpeaker;
     public bool isDialogueActive = false;
 
     public float typingSpeed = 0.2f;
@@ -28,13 +30,17 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
 
         lines = new Queue<DialogueLine>();
+    }
+
+    public void SetActiveSpeaker(DialogueTrigger trigger)
+    {
+        activeSpeaker = trigger;
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -47,7 +53,11 @@ public class DialogueManager : MonoBehaviour
 
         lines.Clear();
 
-        foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
+        currentDialog = dialogue;
+
+        lines.Enqueue(new()); // blank entry agar first entry muncul
+        
+        foreach (var dialogueLine in dialogue.dialogueLines)
         {
             lines.Enqueue(dialogueLine);
         }
@@ -87,6 +97,19 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         isDialogueActive = false;
+
+        if (lines.Count <= 0)
+            CheckNextDialogueSection();
+
         animator.Play("hide");
+
+        currentDialog = null;
+        activeSpeaker = null;
+    }
+
+    private void CheckNextDialogueSection()
+    {
+        if (currentDialog.proceedToNextSection)
+            activeSpeaker.SetNextDialogueSection();
     }
 }
