@@ -20974,10 +20974,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -25
       objectReference: {fileID: 0}
-    - target: {fileID: 4469064545818893565, guid: da9779e9f6dcfa748af3bc8d9fc5076a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 658505696728511712, guid: da9779e9f6dcfa748af3bc8d9fc5076a, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -23088,11 +23084,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4236228139589664179, guid: d54151e24b34d3e4b961b88d1a53eb64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.4360228
+      value: 5.4318495
       objectReference: {fileID: 0}
     - target: {fileID: 4236228139589664179, guid: d54151e24b34d3e4b961b88d1a53eb64, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.57615
+      value: -1.57585
       objectReference: {fileID: 0}
     - target: {fileID: 4236228139589664179, guid: d54151e24b34d3e4b961b88d1a53eb64, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23191,7 +23187,7 @@ PrefabInstance:
       objectReference: {fileID: 2543510754041941856}
     - target: {fileID: 6003043085950033134, guid: 59580103222b2534d90013d87fbde3f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.6842666
+      value: 3.6884556
       objectReference: {fileID: 0}
     - target: {fileID: 6003043085950033134, guid: 59580103222b2534d90013d87fbde3f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23388,6 +23384,22 @@ PrefabInstance:
     - target: {fileID: 4212591609998742269, guid: 6be9830aa137c784eb7397ceec8317a8, type: 3}
       propertyPath: m_Name
       value: Overlay Sanity UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629067056636545114, guid: 6be9830aa137c784eb7397ceec8317a8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 776.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629067056636545114, guid: 6be9830aa137c784eb7397ceec8317a8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 438.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629067056636545114, guid: 6be9830aa137c784eb7397ceec8317a8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 390.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629067056636545114, guid: 6be9830aa137c784eb7397ceec8317a8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 219.36
       objectReference: {fileID: 0}
     - target: {fileID: 5766279770454578145, guid: 6be9830aa137c784eb7397ceec8317a8, type: 3}
       propertyPath: m_Camera
