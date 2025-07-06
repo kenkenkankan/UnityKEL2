@@ -7,7 +7,7 @@ using UnityEngine;
 public interface IDataPersistence
 {
     void LoadData(GameData data);
-    void SaveData(ref GameData data);
+    void SaveData(GameData data);
 
     string Id { get; set; }
 }

@@ -1,48 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Obsolete("Ganti Ke Animasi aja")]
 public class ButtonInteractions : MonoBehaviour
 {
     [SerializeField] private Selectable button;
     [SerializeField] private Image image;
-    [SerializeField] private TMP_Text text;
-
+    [SerializeField] private List<TMP_Text> texts;
     [SerializeField] private Color textHover;
     [SerializeField] private Color textExit;
     [SerializeField] private Color textDisable;
     [SerializeField] private Color glowOrigin;
-
-    private Material origin;
+    
+    [SerializeField] private Material origin;
     private Material copy;
+    private bool HasMaterial = false;
 
     void Start()
     {
-        image = GetComponent<Image>();
-        origin = text.fontSharedMaterial;
-        copy = new(origin);
-        text.fontSharedMaterial = copy;
+        if (origin != null)
+        {
+            origin = texts[0].fontSharedMaterial;
+            copy = new(origin);
+            HasMaterial = true;
+            texts[0].fontSharedMaterial = copy;
+        }
     }
 
     public void Hover()
     {
         image.color = new Color(128, 128, 128, 125);
-        text.color = textHover;
-        copy.SetColor("_GlowColor", textHover);
-        text.UpdateMeshPadding();
+        SetFontGlow(textHover);
+        foreach (var text in texts)
+        {
+            text.color = textHover;
+            text.UpdateMeshPadding();
+        }
     }
 
     public void Exit()
     {
         image.color = new Color(128, 128, 128, 0);
-        text.color = textExit;
-        
-        copy.SetColor("_GlowColor", glowOrigin);
-        text.UpdateMeshPadding();
+
+        SetFontGlow(glowOrigin);
+        foreach (var text in texts)
+        {
+            text.color = textExit;
+            text.UpdateMeshPadding();
+        }
+    }
+
+    private void SetFontGlow(Color color)
+    {
+        if(HasMaterial)
+            copy.SetColor("_GlowColor", glowOrigin);
     }
 
     public void Select()
     {
         image.color = new Color(255, 255, 255, 255);
+    }
+
+    [ContextMenu("GetAllTextInChildren")]
+    private void GetAllTextInChildren()
+    {
+        texts = GetComponentsInChildren<TMP_Text>().ToList();
     }
 }

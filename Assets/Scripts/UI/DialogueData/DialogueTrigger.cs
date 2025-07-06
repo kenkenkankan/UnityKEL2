@@ -91,7 +91,7 @@ public class DialogueTrigger : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void SaveData(ref GameData data)
+    public void SaveData(GameData data)
     {
         if (!data.dialoguesKeyPoints.ContainsKey(Id))
             data.dialoguesKeyPoints.Add(Id, new());

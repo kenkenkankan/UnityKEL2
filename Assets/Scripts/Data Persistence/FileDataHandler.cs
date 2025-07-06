@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class FileDataHandler
 {
-    private string dataDirPath = "";
-    private string dataFileName = "";
+    public string dataDirPath = "";
+    public string dataFileName = "";
 
     private bool useEncryption = false;
     private readonly string ecryptioCodenWord = "secret";
@@ -18,17 +18,19 @@ public class FileDataHandler
         this.useEncryption = useEncryption;
     }
 
-    public GameData Load(string profileName)
+    public GameData Load(string profileId)
     {
-        string fullpath = Path.Combine(dataDirPath, profileName, dataFileName);
+        if (profileId == null) return null;
+
+        string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
         GameData loadedData = null;
-        if (File.Exists(fullpath))
+        if (File.Exists(fullPath))
         {
             try
             {
                 string dataToLoad = "";
                 // Load serialized data fromm file
-                using FileStream stream = new(fullpath, FileMode.Open);
+                using FileStream stream = new(fullPath, FileMode.Open);
                 using StreamReader sr = new(stream);
                 dataToLoad = sr.ReadToEnd();
 
@@ -40,19 +42,21 @@ public class FileDataHandler
             }
             catch (Exception ex)
             {
-                Debug.LogError("Error occured when trying to load data from file: " + fullpath + "\n" + ex);
+                Debug.LogError("Error occured when trying to load data from file: " + fullPath + "\n" + ex);
             }
         }
         return loadedData;
     }
 
-    public void Save(GameData data, string profileName)
+    public void Save(GameData data, string profileId)
     {
+        if (profileId == null) return;
+
         // Path combine for different OS have different path separator
-        string fullpath = Path.Combine(dataDirPath, profileName, dataFileName);
+        string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
         try
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(fullpath));
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
 
             // Serialize the C# game data object into Json 
             string dataToStore = JsonUtility.ToJson(data,true);
@@ -60,13 +64,32 @@ public class FileDataHandler
             if (useEncryption)
                 dataToStore = EncryptDecrypt(dataToStore);
 
-            using FileStream stream = new(fullpath, FileMode.Create);
+            using FileStream stream = new(fullPath, FileMode.Create);
             using StreamWriter sw = new(stream);
             sw.Write(dataToStore);
         }
         catch (Exception ex)
         {
-            Debug.LogError("Error occured when try to save data to file: " + fullpath + "\n" + ex);
+            Debug.LogError("Error occured when try to save data to file: " + fullPath + "\n" + ex);
+        }
+    }
+
+    public void DeleteData(string profileId)
+    {
+        if (profileId == null) return;
+
+        string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
+        Debug.Log("full path " + fullPath);
+        try
+        {   
+            if (File.Exists(fullPath))
+            {
+                Directory.Delete(Path.GetDirectoryName(fullPath), true);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Error occured when try to save data to file: " + fullPath + "\n" + ex);
         }
     }
 
@@ -79,7 +102,6 @@ public class FileDataHandler
         {
             string profileId = dirinfo.Name;
 
-            // defensive programming check if the data file exists
             // if it doesn't, then this folder isn't a profile and should be skipped
             string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
             if (!File.Exists(fullPath))
@@ -103,6 +125,31 @@ public class FileDataHandler
         }
 
         return profileDictionaries;
+    }
+
+    public string GetMostRecentUpdatedProfile()
+    {
+        string mostRecentProfileId = default;
+        Dictionary<string, GameData> profileGameData = LoadAllProfile();
+        foreach (var pair in profileGameData)
+        {
+            var profileId = pair.Key;
+            var gameData = pair.Value;
+
+            if (gameData == null) continue;
+
+            if (mostRecentProfileId == default)
+                mostRecentProfileId = profileId;
+            else
+            {
+                DateTime mostRecentDateTime = DateTime.FromBinary(profileGameData[mostRecentProfileId].lastSaveTime);
+                DateTime newDateTime = DateTime.FromBinary(gameData.lastSaveTime);
+
+                if (newDateTime > mostRecentDateTime)
+                    mostRecentProfileId = profileId;
+            }
+        }
+        return mostRecentProfileId;
     }
 
     private string EncryptDecrypt(string data)

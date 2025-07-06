@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icon & Asset_1
+      name: Tengkorak
       rect:
         serializedVersion: 2
         x: 1058
@@ -105,7 +105,7 @@ TextureImporter:
         width: 220
         height: 241
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,7 +118,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_2
+      name: Lentera
       rect:
         serializedVersion: 2
         x: 1366
@@ -126,7 +126,7 @@ TextureImporter:
         width: 143
         height: 243
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,15 +139,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_3
+      name: Save Icon
       rect:
         serializedVersion: 2
         x: 1594
-        y: 729
+        y: 730
         width: 216
         height: 233
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,7 +160,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_4
+      name: Heart
       rect:
         serializedVersion: 2
         x: 801
@@ -168,7 +168,7 @@ TextureImporter:
         width: 194
         height: 186
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,7 +181,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_6
+      name: Button 1
       rect:
         serializedVersion: 2
         x: 108
@@ -189,7 +189,7 @@ TextureImporter:
         width: 405
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,7 +202,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_7
+      name: Buttpn 2
       rect:
         serializedVersion: 2
         x: 111
@@ -210,7 +210,7 @@ TextureImporter:
         width: 280
         height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -231,7 +231,7 @@ TextureImporter:
         width: 4
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -244,7 +244,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_9
+      name: Button 3
       rect:
         serializedVersion: 2
         x: 112
@@ -252,7 +252,7 @@ TextureImporter:
         width: 327
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -265,15 +265,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_10
+      name: Pause Button
       rect:
         serializedVersion: 2
-        x: 558
+        x: 556
         y: 453
         width: 173
         height: 161
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -286,7 +286,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_11
+      name: Close Button
       rect:
         serializedVersion: 2
         x: 812
@@ -294,7 +294,7 @@ TextureImporter:
         width: 173
         height: 161
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -315,7 +315,7 @@ TextureImporter:
         width: 173
         height: 161
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -328,15 +328,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_13
+      name: Item Slot 1
       rect:
         serializedVersion: 2
         x: 1362
-        y: 450
+        y: 451
         width: 173
         height: 161
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -349,16 +349,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_14
+      name: Chalk Border
       rect:
         serializedVersion: 2
-        x: 1589
+        x: 1590
         y: 452
         width: 170
         height: 158
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 19, y: 22, z: 20, w: 20}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -370,15 +370,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_15
+      name: Slider 1
       rect:
         serializedVersion: 2
-        x: 123
+        x: 124
         y: 311
         width: 607
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -391,16 +391,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_16
+      name: Knob 1 Sliced
       rect:
         serializedVersion: 2
         x: 806
-        y: 255
+        y: 256
         width: 32
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 5, y: 7, z: 8, w: 10}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -412,15 +412,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_17
+      name: Knob 2
       rect:
         serializedVersion: 2
         x: 873
-        y: 256
+        y: 257
         width: 30
         height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -433,7 +433,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_18
+      name: Title Box 1
       rect:
         serializedVersion: 2
         x: 1084
@@ -441,7 +441,7 @@ TextureImporter:
         width: 639
         height: 104
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -454,15 +454,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_21
+      name: Slider 2
       rect:
         serializedVersion: 2
-        x: 121
+        x: 120
         y: 184
         width: 601
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -475,7 +475,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icon & Asset_22
+      name: Title Box 2
       rect:
         serializedVersion: 2
         x: 1088
@@ -483,7 +483,7 @@ TextureImporter:
         width: 442
         height: 94
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -491,6 +491,27 @@ TextureImporter:
       bones: []
       spriteID: 323d43681c855564ba4d993b220d3e04
       internalID: 248164483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Item Slot 3
+      rect:
+        serializedVersion: 2
+        x: 1590
+        y: 452
+        width: 170
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8ee39230e0fa184eb3b5137e614a961
+      internalID: -3304540
       vertices: []
       indices: 
       edges: []
@@ -506,31 +527,32 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Icon & Asset_0: 575062636
-      Icon & Asset_1: -1706369279
-      Icon & Asset_10: -279615120
-      Icon & Asset_11: -2147053299
+      Button 1: -1641700609
+      Button 3: -802956789
+      Buttpn 2: 774039300
+      Chalk Border: -1737428211
+      Close Button: -2147053299
+      Heart: 2146531647
+      Icon & Asset_0: -261778533
       Icon & Asset_12: 2127431777
-      Icon & Asset_13: -322206894
-      Icon & Asset_14: -1737428211
-      Icon & Asset_15: -927856315
-      Icon & Asset_16: -178670706
-      Icon & Asset_17: 1008899696
-      Icon & Asset_18: -584029520
       Icon & Asset_19: -1698988733
-      Icon & Asset_2: -1674286177
       Icon & Asset_20: 50036989
-      Icon & Asset_21: 1571958406
-      Icon & Asset_22: 248164483
       Icon & Asset_23: 1717322771
       Icon & Asset_24: -183669762
-      Icon & Asset_3: 1955805380
-      Icon & Asset_4: 2146531647
       Icon & Asset_5: -1132179912
-      Icon & Asset_6: -1641700609
-      Icon & Asset_7: 774039300
       Icon & Asset_8: -1864609228
-      Icon & Asset_9: -802956789
+      Item Slot 1: -322206894
+      Item Slot 3: 575062636
+      Knob 1 Sliced: -178670706
+      Knob 2: 1008899696
+      Lentera: -1674286177
+      Pause Button: -279615120
+      Save Icon: 1955805380
+      Slider 1: -927856315
+      Slider 2: 1571958406
+      Tengkorak: -1706369279
+      Title Box 1: -584029520
+      Title Box 2: 248164483
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

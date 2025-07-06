@@ -30,7 +30,7 @@ public class ItemPickup : MonoBehaviour, IDataPersistence
         }    
     }
 
-    public void SaveData(ref GameData data)
+    public void SaveData(GameData data)
     {
         if (data.keyItemsCollected.ContainsKey(id))
         {
